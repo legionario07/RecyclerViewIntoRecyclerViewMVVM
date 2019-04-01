@@ -1,14 +1,18 @@
 package br.com.omniatechnology.recyclerviewintorecyclerview.adapters;
 
+import android.databinding.DataBindingUtil;
+import android.graphics.ColorSpace;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import br.com.omniatechnology.recyclerviewintorecyclerview.R;
+import br.com.omniatechnology.recyclerviewintorecyclerview.databinding.LayoutParentBinding;
 import br.com.omniatechnology.recyclerviewintorecyclerview.models.ModelA;
-import br.com.omniatechnology.recyclerviewintorecyclerview.models.ModelB;
 
 public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAViewHolder> {
 
@@ -22,13 +26,45 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
     @NonNull
     @Override
     public ModelAViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return null;
+
+        LayoutParentBinding layoutParentBinding = DataBindingUtil.inflate(
+
+                LayoutInflater.from(viewGroup.getContext()),
+                        R.layout.layout_parent,
+                viewGroup,
+                false
+
+        );
+
+        return new ModelAViewHolder(layoutParentBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ModelAViewHolder modelAViewHolder, int i) {
 
+        ModelA modelA = lista.get(i);
+
+        modelAViewHolder.layoutParentBinding.setModelA(modelA);
+
+        initRecyclerView(modelAViewHolder, modelA);
+
+
+
     }
+
+    private void initRecyclerView(ModelAViewHolder modelAViewHolder, ModelA modelA) {
+
+        modelAViewHolder.layoutParentBinding.recyclerViewInternal.setLayoutManager(
+                new LinearLayoutManager(modelAViewHolder.itemView.getContext())
+        );
+
+        modelAViewHolder.layoutParentBinding.recyclerViewInternal.setHasFixedSize(true);
+        ModelBAdapter modelBAdapter = new ModelBAdapter(modelA.getModelsB());
+        modelAViewHolder.layoutParentBinding.recyclerViewInternal.setAdapter(modelBAdapter);
+
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -37,8 +73,11 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
 
     public static class ModelAViewHolder extends RecyclerView.ViewHolder {
 
-        public ModelAViewHolder(@NonNull View itemView) {
-            super(itemView);
+        private LayoutParentBinding layoutParentBinding;
+
+        public ModelAViewHolder(@NonNull LayoutParentBinding itemView) {
+            super(itemView.getRoot());
+            layoutParentBinding = itemView;
         }
     }
 

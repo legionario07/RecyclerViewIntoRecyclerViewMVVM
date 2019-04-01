@@ -3,6 +3,10 @@
 
     <data>
 
+        <variable
+            name="modelA"
+            type="br.com.omniatechnology.recyclerviewintorecyclerview.models.ModelA"/>
+
 
     </data>
 
@@ -24,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="TESTE"
+                android:text="@{modelA.texto1}"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -32,7 +36,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recdyclerViewInternal"
+            android:id="@+id/recyclerViewInternal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
