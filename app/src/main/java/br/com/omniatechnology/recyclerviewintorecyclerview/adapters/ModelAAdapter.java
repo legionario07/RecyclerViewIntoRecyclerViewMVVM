@@ -1,5 +1,6 @@
 package br.com.omniatechnology.recyclerviewintorecyclerview.adapters;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
@@ -7,7 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -53,7 +56,7 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
         initRecyclerView(modelAViewHolder, modelA);
 
         if(i%2==0)
-            modelAViewHolder.layoutParentBinding.ll.setBackgroundColor(Color.CYAN);
+            modelAViewHolder.layoutParentBinding.ll.setBackgroundColor(Color.parseColor("#ADD8E6"));
 
 
     }
@@ -80,10 +83,18 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
     public static class ModelAViewHolder extends RecyclerView.ViewHolder {
 
         private LayoutParentBinding layoutParentBinding;
+        private Context context;
 
-        public ModelAViewHolder(@NonNull LayoutParentBinding itemView) {
+        public ModelAViewHolder(@NonNull final LayoutParentBinding itemView) {
             super(itemView.getRoot());
             layoutParentBinding = itemView;
+            this.context = itemView.getRoot().getContext();
+            layoutParentBinding.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Cliquei no item: "+itemView.getModelA().getTexto1(),Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 
