@@ -25,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        modelAAdapter = new ModelAAdapter(getLista());
         activityMainBinding.recyclerViewParent.setLayoutManager(new LinearLayoutManager(this));
         activityMainBinding.recyclerViewParent.setHasFixedSize(true);
+        modelAAdapter = new ModelAAdapter(getLista());
         activityMainBinding.recyclerViewParent.setAdapter(modelAAdapter);
-        activityMainBinding.executePendingBindings();
 
     }
 

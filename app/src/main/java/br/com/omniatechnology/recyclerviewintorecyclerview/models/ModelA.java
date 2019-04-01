@@ -3,7 +3,7 @@ package br.com.omniatechnology.recyclerviewintorecyclerview.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
+
 import java.util.List;
 
 public class ModelA implements Parcelable {

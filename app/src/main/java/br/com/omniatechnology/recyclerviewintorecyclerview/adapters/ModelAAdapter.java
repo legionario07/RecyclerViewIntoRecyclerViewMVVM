@@ -1,6 +1,7 @@
 package br.com.omniatechnology.recyclerviewintorecyclerview.adapters;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
 
 
     private List<ModelA> lista;
+
 
     public ModelAAdapter(List<ModelA> lista){
         this.lista = lista;
@@ -44,10 +46,14 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
 
         ModelA modelA = lista.get(i);
 
+
+
         modelAViewHolder.layoutParentBinding.setModelA(modelA);
 
         initRecyclerView(modelAViewHolder, modelA);
 
+        if(i%2==0)
+            modelAViewHolder.layoutParentBinding.ll.setBackgroundColor(Color.CYAN);
 
 
     }
@@ -68,7 +74,7 @@ public class ModelAAdapter extends RecyclerView.Adapter<ModelAAdapter.ModelAView
 
     @Override
     public int getItemCount() {
-        return 0;
+        return lista.size();
     }
 
     public static class ModelAViewHolder extends RecyclerView.ViewHolder {
